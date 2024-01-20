@@ -124,6 +124,7 @@ class GuessList {
         }
         this.currentRow++;
         if (this.currentRow === numGuesses){
+            message.textContent = "PERDEU!"
             console.log("PERDEU");
             return;
         }
