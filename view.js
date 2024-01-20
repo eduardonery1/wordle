@@ -1,7 +1,16 @@
 const guessList = document.getElementById("guessList");
 const message = document.getElementById("message");
-const dayWord = "ROMA";
 const numGuesses = 5;
+
+let words = ["ROMA", "PARIS", "PIAUI", "MATRIZ", "IGREJA", "JOGAR"];
+
+
+function random(max){
+    return Math.floor(Math.random()*(max + 1));
+}
+
+const dayWord = words[random(words.length)];
+
 
 
 class LetterBox {
