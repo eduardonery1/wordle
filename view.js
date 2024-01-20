@@ -1,15 +1,15 @@
-const guessList = document.getElementById("guessList");
+let guessList = document.getElementById("guessList");
 const message = document.getElementById("message");
-const numGuesses = 5;
+const numGuesses = 4;
 
-let words = ["ROMA", "PARIS", "PIAUI", "MATRIZ", "IGREJA", "JOGAR"];
+let words = ["ROMA", "PARIS", "PIAUI", "MATRIZ", "IGREJA", "JOGAR", "PULAR", "PEQUI", "GATO"];
 
 
 function random(max){
     return Math.floor(Math.random()*(max + 1));
 }
 
-const dayWord = words[random(words.length)];
+const dayWord = words[random(words.length-1)];
 
 
 
@@ -57,8 +57,6 @@ class Guess {
         }
     }
 
-
-
     getSection() {
         return this.guessSection;
     }
@@ -79,7 +77,6 @@ class Guess {
             let s = "";
             for (let i = 0; i < this.size; i++){
                 let c = this.letterBoxes[i].letterBox.value;
-                console.log(c)
                 s += c;
                 if (c === dayWord[i]){
                     this.letterBoxes[i].letterBox.style.background = "green";
@@ -128,6 +125,7 @@ class GuessList {
         this.currentRow++;
         if (this.currentRow === numGuesses){
             message.textContent = "PERDEU!"
+            btn.style.visibility = "visible";
             return;
         }
         this.guessRows[this.currentRow].activate();
@@ -135,4 +133,22 @@ class GuessList {
 }
 
 
-const guesses = new GuessList(guessList, dayWord, numGuesses);
+
+let originalHTML = document.getElementById("guessList").innerHTML;
+let guesses = new GuessList(guessList, dayWord, numGuesses);
+
+
+let sec = document.getElementById("try-again");
+let btn = document.createElement("button");
+sec.appendChild(btn);
+btn.innerText = "Tentar Novamente?";
+btn.style.visibility = "hidden";
+btn.onclick = () => {
+    let main = document.getElementById("main");
+    main.removeChild(guessList);
+    guessList = document.createElement("section");
+    guessList.setAttribute("id", "guessList");
+    main.insertBefore(guessList, sec);
+    guesses = new GuessList(guessList, dayWord, numGuesses);
+    btn.style.visibility = "hidden";
+};
