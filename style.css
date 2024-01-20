@@ -11,6 +11,7 @@ body {
     font-size: 60px;
 }
 
+
 input {
     font-size: 40px;
     font-weight: 1000;
@@ -20,5 +21,12 @@ input {
     line-height: 2em;
     margin: 5px 5px;
     background-color: #615458;
+    text-indent: 0.6em;
+}
+
+.letter:focus,
+.letter:focus ~.letter {
+    width: 2.1em;
+    line-height: 2.1em;
     text-indent: 0.6em;
 }

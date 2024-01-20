@@ -5,11 +5,11 @@ const numGuesses = 5;
 
 
 class LetterBox {
-    constructor(id, row){
-        this.letterBox = document.createElement("input");
-        this.letterBox.setAttribute("id", id);
-        this.letterBox.readOnly = true;  
+    constructor(row){
         this.row = row;
+        this.letterBox = document.createElement("input");
+        this.letterBox.setAttribute("class", "letter");
+        this.letterBox.readOnly = true;
         this.letterBox.oninput = (e) => {
             this.letterBox.value = e.data.toUpperCase();
             row.update();
@@ -30,11 +30,9 @@ class LetterBox {
 }
 
 class Guess {
-    constructor(guessList, row, size){
+    constructor(guessList, size){
         this.guessList = guessList;
-        this.row = row;
         this.currentLetter = 0;
-        this.active = false;
         this.size = size;
         this.guessSection = document.createElement("section");
         this.letterBoxes = [];
@@ -43,9 +41,8 @@ class Guess {
 
     #init(){
         this.guessSection.setAttribute("class", "guess");
-        this.guessSection.setAttribute("id", this.row);
         for (let i = 0; i < this.size; i++){
-            let letterBox = new LetterBox(i * this.row, this);
+            let letterBox = new LetterBox(this);
             this.letterBoxes.push(letterBox);
             this.guessSection.appendChild(letterBox.getInput());
         }
@@ -79,11 +76,9 @@ class Guess {
                     this.letterBoxes[i].letterBox.style.background = "green";
                 }
                 else if (dayWord.includes(c)){
-                    console.log("here")
                     this.letterBoxes[i].letterBox.style.background = "yellow";
                 }
                 else{
-                    console.log(c)
                     this.letterBoxes[i].letterBox.style.background = "red"
                 }
             }
@@ -108,24 +103,22 @@ class GuessList {
 
     #init(){
         for (let i = 0; i < this.size; i++){
-            let guessRow = new Guess(this, i, this.word.length);
+            let guessRow = new Guess(this, this.word.length);
             this.guessListView.appendChild(guessRow.getSection());
             this.guessRows.push(guessRow);
         }
 
-        this.update();
+        this.update(false);
     }
 
     update(win){
         if (win){
-            console.log("WIN");
             message.textContent = "VENCEU!"
             return;
         }
         this.currentRow++;
         if (this.currentRow === numGuesses){
             message.textContent = "PERDEU!"
-            console.log("PERDEU");
             return;
         }
         this.guessRows[this.currentRow].activate();
