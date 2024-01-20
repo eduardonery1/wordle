@@ -1,8 +1,8 @@
 body {
-    width: 80%;
     margin: 0 auto;
     text-align: center;
     background-color: #6e5c62;
+    width: 95%;
 }
 
 header {
@@ -33,25 +33,25 @@ button {
     margin-right: auto;
     margin-top: 1em;
     background-color: #68585d;
-    width:fit-content;
+    width: fit-content;
     border-radius: 15px;
 }
 
 input {
-    font-size: 40px;
+    font-size: 1em;
     font-weight: 1000;
     color: white;
-    width: 2em;
+    width: 2.5em;
     border-radius: 15px;
-    line-height: 2em;
+    line-height: 2.5em;
     margin: 5px 5px;
     background-color: #615458;
-    text-indent: 0.6em;
+    text-indent: 0.4em;
 }
 
 .letter:focus,
-.letter:focus ~.letter {
-    width: 2.1em;
-    line-height: 2.1em;
-    text-indent: 0.6em;
+.letter:focus~.letter {
+    width: 2.6em;
+    line-height: 2.6em;
+    text-indent: 0.5em;
 }

@@ -2,7 +2,7 @@ let guessList = document.getElementById("guessList");
 const message = document.getElementById("message");
 
 
-let words = ["ROMA", "PARIS", "PIAUI", "MATRIZ", "IGREJA", "JOGAR", "PULAR", "PEQUI", "GATO", "ALMOÇO"];
+let words = ["ROMA", "PARIS", "PIAUI", "JOGAR", "PULAR", "PEQUI", "GATO"];
 
 
 function random(max){
