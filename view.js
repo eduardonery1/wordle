@@ -1,8 +1,8 @@
 let guessList = document.getElementById("guessList");
 const message = document.getElementById("message");
-const numGuesses = 4;
 
-let words = ["ROMA", "PARIS", "PIAUI", "MATRIZ", "IGREJA", "JOGAR", "PULAR", "PEQUI", "GATO"];
+
+let words = ["ROMA", "PARIS", "PIAUI", "MATRIZ", "IGREJA", "JOGAR", "PULAR", "PEQUI", "GATO", "ALMOÇO"];
 
 
 function random(max){
@@ -10,7 +10,7 @@ function random(max){
 }
 
 const dayWord = words[random(words.length-1)];
-
+const numGuesses = dayWord.length;
 
 
 class LetterBox {
