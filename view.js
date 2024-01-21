@@ -1,16 +1,15 @@
 let guessList = document.getElementById("guessList");
 const message = document.getElementById("message");
 
-
-let words = ["ROMA", "PARIS", "PIAUI", "JOGAR", "PULAR", "PEQUI", "GATO"];
+let words = ["CARIOCA", "ROMA", "PARIS", "PIAUI", "JOGAR", "PULAR", "PEQUI", "GATO", "IGREJA", "FEIRA", "FREIRA", "ESTADO"];
 
 
 function random(max){
     return Math.floor(Math.random()*(max + 1));
 }
 
-const dayWord = words[random(words.length-1)];
-const numGuesses = dayWord.length;
+let dayWord = words[random(words.length-1)];
+let numGuesses = dayWord.length;
 
 
 class LetterBox {
@@ -120,12 +119,15 @@ class GuessList {
     update(win){
         if (win){
             message.textContent = "VENCEU!"
+            btn.style.visibility = "visible";
+            btn.innerText = "Mudar palavra?";
             return;
         }
         this.currentRow++;
         if (this.currentRow === numGuesses){
             message.textContent = "PERDEU!"
             btn.style.visibility = "visible";
+            btn.innerText = "Tentar Novamente?";
             return;
         }
         this.guessRows[this.currentRow].activate();
@@ -134,14 +136,12 @@ class GuessList {
 
 
 
-let originalHTML = document.getElementById("guessList").innerHTML;
 let guesses = new GuessList(guessList, dayWord, numGuesses);
 
 
 let sec = document.getElementById("try-again");
 let btn = document.createElement("button");
 sec.appendChild(btn);
-btn.innerText = "Tentar Novamente?";
 btn.style.visibility = "hidden";
 btn.onclick = () => {
     let main = document.getElementById("main");
@@ -149,6 +149,15 @@ btn.onclick = () => {
     guessList = document.createElement("section");
     guessList.setAttribute("id", "guessList");
     main.insertBefore(guessList, sec);
-    guesses = new GuessList(guessList, dayWord, numGuesses);
+
+    if (btn.style.innerText === "Tentar Novamente?"){
+        guesses = new GuessList(guessList, dayWord, numGuesses);
+    } else {
+        words = words.filter((s)=>{return s !== dayWord});
+        console.log(words)
+        dayWord = words[random(words.length -1)];
+        numGuesses = dayWord.length;
+        guesses = new GuessList(guessList, dayWord, numGuesses);
+    }
     btn.style.visibility = "hidden";
 };
